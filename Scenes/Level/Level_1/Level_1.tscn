@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6w0ybrlrh108"]
+
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Level.gd" id="1_jkll5"]
+[ext_resource type="Texture2D" uid="uid://cs341e7qdoswk" path="res://Images/World_1/BGFantasy.png" id="1_o5b6q"]
+[ext_resource type="PackedScene" uid="uid://c6inox8k1uonk" path="res://Scenes/Level/Background/Background.tscn" id="1_t01k2"]
+[ext_resource type="PackedScene" uid="uid://7q7i6um8iixy" path="res://Scenes/Balls/RedBall/RedBall.tscn" id="2_6bhmn"]
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Camera2D.gd" id="4_0lqqr"]
+[ext_resource type="PackedScene" uid="uid://e7ebdnq76ohl" path="res://Scenes/UI/UI.tscn" id="6_xupjs"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_jkll5")
+
+[node name="Background" parent="." instance=ExtResource("1_t01k2")]
+texture = ExtResource("1_o5b6q")
+
+[node name="RedBall" parent="." instance=ExtResource("2_6bhmn")]
+position = Vector2(535, 1294)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("4_0lqqr")
+target = NodePath("../RedBall")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("6_xupjs")]
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="ClockSpawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="ClockSpawnTimer" to="." method="_on_clock_spawn_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c6inox8k1uonk"]
+
+[ext_resource type="Script" path="res://Scenes/Level/Background/Background.gd" id="1_o5y0f"]
+[ext_resource type="Texture2D" uid="uid://cs341e7qdoswk" path="res://Images/World_1/BGFantasy.png" id="2_r56wn"]
+
+[node name="Background" type="Node2D"]
+script = ExtResource("1_o5y0f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -2048)
+scale = Vector2(8, 8)
+texture = ExtResource("2_r56wn")
+centered = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="Sprite2D"]
+rect = Rect2(0, 0, 20, 20)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(8, 8)
+texture = ExtResource("2_r56wn")
+centered = false
+
+[node name="VisibleOnScreenNotifier2D2" type="VisibleOnScreenNotifier2D" parent="Sprite2D2"]
+rect = Rect2(0, 0, 20, 20)
+
+[connection signal="screen_exited" from="Sprite2D/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="screen_exited" from="Sprite2D2/VisibleOnScreenNotifier2D2" to="." method="_on_visible_on_screen_notifier_2d_2_screen_exited"]

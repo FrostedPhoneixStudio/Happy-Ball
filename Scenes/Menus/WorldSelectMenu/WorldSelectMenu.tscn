@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://ucprdptrya8l"]
+
+[ext_resource type="Script" path="res://Scenes/Menus/WorldSelectMenu/WorldSelectMenu.gd" id="1_whwk6"]
+[ext_resource type="Theme" uid="uid://c3gbnda0qarvm" path="res://Theme.tres" id="2_p80yi"]
+[ext_resource type="PackedScene" uid="uid://b464uo2kmgrf8" path="res://Scenes/Menus/WorldSelectMenu/WorldSelectButton.tscn" id="3_pp6fl"]
+[ext_resource type="Texture2D" uid="uid://cs341e7qdoswk" path="res://Images/World_1/BGFantasy.png" id="4_swhjq"]
+
+[node name="WorldSelectMenu" type="CanvasLayer"]
+script = ExtResource("1_whwk6")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(0, 1900)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("2_p80yi")
+text = "World Selection"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(900, 1500)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="FantasyButton" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_pp6fl")]
+layout_mode = 2
+text = "Fantasy"
+level_path = "res://Scenes/Level/Level_1/Level_1.tscn"
+background_texture = ExtResource("4_swhjq")
+
+[node name="IceButton" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_pp6fl")]
+layout_mode = 2
+text = "Ice"
+level_path = "res://Scenes/Level/Level_1/Level_1.tscn"
+background_texture = ExtResource("4_swhjq")
+
+[node name="ForestButton" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_pp6fl")]
+layout_mode = 2
+text = "Forest"
+level_path = "res://Scenes/Level/Level_1/Level_1.tscn"
+background_texture = ExtResource("4_swhjq")
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_p80yi")
+text = "Back"
+
+[connection signal="world_select_button_pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/FantasyButton" to="." method="_on_world_select_button_pressed"]
+[connection signal="world_select_button_pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/IceButton" to="." method="_on_world_select_button_pressed"]
+[connection signal="world_select_button_pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/ForestButton" to="." method="_on_world_select_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer2/VBoxContainer/Button" to="." method="_on_button_pressed"]

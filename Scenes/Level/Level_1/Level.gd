@@ -2,6 +2,17 @@ extends Node2D
 
 class_name Level
 
+
+
+@export var platform_count_on_screen := 5 # maximum number of platform on screen
+@export var coin_spawn_probability := 0.2 # propability of spawning a coin on a platform (for later maybe a curve?)
+
+@onready var last_platforms_position:Vector2 = $Platforms.global_position # used for platform movement
+# used for platform spawning
+@onready var next_platform_spawn_y:int = get_viewport_rect().size.y
+@onready var platform_spawn_increment:float = get_viewport_rect().size.y / platform_count_on_screen
+@onready var timer:Timer = $GameTimer
+
 # weighted list of probabilities of platform spawnes
 var platform_weights = {
 	"res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn":10,
@@ -9,30 +20,20 @@ var platform_weights = {
 	"res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn":1,
 }
 
-@export var platform_count_on_screen := 5 # maximum number of platform on screen
-@export var coin_spawn_probability := 0.2 # propability of spawning a coin on a platform (for later maybe a curve?)
+var platforms_on_screen:Array[Platform] = [] # array of all platforms currently on screen
 var queue_clock_spawn := false
 
 # used for platform movement
 var initial_mouse_position 
-@onready var last_platforms_position:Vector2 = $Platforms.global_position
-
-
-var platforms_on_screen:Array[Platform] = [] # array of all platforms currently on screen
-
-# used for platform spawning
-@onready var next_platform_spawn_y:int = get_viewport_rect().size.y
-@onready var platform_spawn_increment:float = get_viewport_rect().size.y / platform_count_on_screen
-
-@onready var timer:Timer = $GameTimer
 
 
 func _ready():
 	for i in range(platform_count_on_screen):
 		spawn_platform()
 	Global.level = self
-	
-		
+	Global.points = 5
+
+
 func spawn_platform():
 	# add choosing of spawning other platforms by a certain chance here
 	var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
@@ -53,11 +54,11 @@ func spawn_platform():
 		var clock = preload("res://Scenes/Collectable/Clock/Clock.tscn").instantiate()
 		platform.add_child(clock)
 		queue_clock_spawn = false 
-	
+
 
 func _physics_process(delta):
 	position_platforms()
-	
+
 
 func position_platforms():
 	# if mouse is pressed (later touchscreen) then move platforms

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 Global="*res://Globals/Global.gd"
 Helper="*res://Globals/Helper.gd"
+AudioManager="*res://Globals/AudioManager/AudioManager.tscn"
 
 [display]
 

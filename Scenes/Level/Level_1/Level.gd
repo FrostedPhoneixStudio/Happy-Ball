@@ -6,6 +6,7 @@ class_name Level
 
 @export var platform_count_on_screen := 5 # maximum number of platform on screen
 @export var coin_spawn_probability := 0.2 # propability of spawning a coin on a platform (for later maybe a curve?)
+@export var music_name := ""
 
 @onready var last_platforms_position:Vector2 = $Platforms.global_position # used for platform movement
 # used for platform spawning
@@ -32,6 +33,11 @@ func _ready():
 		spawn_platform()
 	Global.level = self
 	Global.points = 5
+	
+	if !AudioManager.is_playing(music_name):
+		for player in AudioManager.playing_bgm:
+			player.fade_out(0.7)
+		AudioManager.fade_in(music_name, 0.7)
 
 
 func spawn_platform():
@@ -74,8 +80,7 @@ func position_platforms():
 
 
 func reset_game_timer():
-	timer.stop()
-	timer.wait_time = 60
+	timer.wait_time = timer.time_left + 60
 	timer.start()
 
 

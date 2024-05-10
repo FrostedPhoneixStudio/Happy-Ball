@@ -38,6 +38,11 @@ func _ready():
 		for player in AudioManager.playing_bgm:
 			player.fade_out(0.7)
 		AudioManager.fade_in(music_name, 0.7)
+		
+	$Player.died.connect(func (player):
+		await get_tree().create_timer(1).timeout
+		$UI/DeathScreen.open()
+		)
 
 
 func spawn_platform():
@@ -48,7 +53,7 @@ func spawn_platform():
 	platform.position.x = randi_range(0, get_viewport_rect().size.x)
 	platform.global_position.y = next_platform_spawn_y
 	next_platform_spawn_y -= platform_spawn_increment
-	platform.ball = $RedBall
+	platform.ball = $Player
 	platform.screen_exited.connect(on_platform_screen_exited)
 	
 	# check if a coin or a clock should spawn on the platform
@@ -94,4 +99,4 @@ func _on_clock_spawn_timer_timeout():
 
 
 func _on_game_timer_timeout():
-	$RedBall.die()
+	$Player.die()

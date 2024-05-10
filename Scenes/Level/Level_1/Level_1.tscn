@@ -14,12 +14,12 @@ music_name = "fantasy_music"
 [node name="Background" parent="." instance=ExtResource("1_t01k2")]
 texture = ExtResource("1_o5b6q")
 
-[node name="RedBall" parent="." instance=ExtResource("2_6bhmn")]
+[node name="Player" parent="." instance=ExtResource("2_6bhmn")]
 position = Vector2(535, 1294)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("4_0lqqr")
-target = NodePath("../RedBall")
+target = NodePath("../Player")
 
 [node name="Platforms" type="Node2D" parent="."]
 

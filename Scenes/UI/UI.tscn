@@ -1,21 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://e7ebdnq76ohl"]
+[gd_scene load_steps=5 format=3 uid="uid://e7ebdnq76ohl"]
 
 [ext_resource type="PackedScene" uid="uid://cua34fuqsx2tb" path="res://Scenes/UI/Timer/Timer.tscn" id="1_kn3tk"]
+[ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="1_w5ac0"]
 [ext_resource type="PackedScene" uid="uid://cokh7kbpvtsk4" path="res://Scenes/UI/Timer/CoinDisplay.tscn" id="2_7n7a4"]
-[ext_resource type="Script" path="res://Scenes/UI/Timer/PointDisplay.gd" id="3_ilre4"]
+[ext_resource type="PackedScene" uid="uid://d0picsb33h0l7" path="res://Scenes/UI/DeathScreen/DeathScreen.tscn" id="4_w3qhg"]
 
 [node name="UI" type="CanvasLayer"]
+script = ExtResource("1_w5ac0")
 
 [node name="Timer" parent="." instance=ExtResource("1_kn3tk")]
 offset_right = 431.0
 
 [node name="CoinDisplay" parent="." instance=ExtResource("2_7n7a4")]
 
-[node name="PointDisplay" parent="." instance=ExtResource("2_7n7a4")]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -142.5
-offset_right = 142.5
-grow_horizontal = 2
-script = ExtResource("3_ilre4")
+[node name="DeathScreen" parent="." instance=ExtResource("4_w3qhg")]
+offset_right = 0.0
+offset_bottom = 0.0

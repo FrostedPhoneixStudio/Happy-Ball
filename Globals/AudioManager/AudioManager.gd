@@ -11,7 +11,7 @@ const SFX = "SFX"
 #"music_name" : {"file_path" : "res://Sound/Music/music_name.mp3", "type" : BGM, "volume" : 1},
 #"sfx_name" : {"file_path" : "res://Sound/Music/sfx_name.mp3", "type" : SFX, "volume" : 1},
 var sound_list = {
-	"fantasy_music" : {"file_path" : "res://Sounds/Music/Fantasy_World_revised(1).ogg", "type" : BGM, "volume" : 1},
+	"fantasy_music" : {"file_path" : "./Sounds/Music/Fantasy_World_revised(1).ogg", "type" : BGM, "volume" : 1},
 }
 
 

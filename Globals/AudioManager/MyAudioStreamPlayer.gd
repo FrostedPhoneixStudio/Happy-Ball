@@ -22,4 +22,5 @@ func fade_in(to_volume:float, time:float = 1):
 	tween.tween_property(self, "volume_db", linear_to_db(to_volume), time)
 
 func _process(delta):
-	print(volume_db)
+	#print(volume_db)
+	pass

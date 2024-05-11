@@ -6,7 +6,6 @@ var main:Main
 var level:Level
 
 var coins = 0
-var points = 0
 
 func _ready():
 	if ! FileAccess.file_exists(SAVE_FILE_PATH):
@@ -19,7 +18,6 @@ func _exit_tree():
 func _save(path):
 	var data = {
 		"coins" = coins,
-		"points" = points
 	}
 	
 	# send data to json file
@@ -34,4 +32,3 @@ func _load(path):
 	if file != null:
 		var save_data = JSON.parse_string(file.get_as_text())
 		coins = save_data["coins"]
-		points = save_data["points"]

@@ -15,7 +15,7 @@ music_name = "fantasy_music"
 texture = ExtResource("1_o5b6q")
 
 [node name="Player" parent="." instance=ExtResource("2_6bhmn")]
-position = Vector2(535, 1294)
+position = Vector2(512, 1294)
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
 script = ExtResource("4_0lqqr")

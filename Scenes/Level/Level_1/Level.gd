@@ -27,12 +27,16 @@ var queue_clock_spawn := false
 # used for platform movement
 var initial_mouse_position 
 
+var points = 0:
+	set(value):
+		points = value
+		$Player.speed_up(points)
+
 
 func _ready():
 	for i in range(platform_count_on_screen):
 		spawn_platform()
 	Global.level = self
-	Global.points = 5
 	
 	if !AudioManager.is_playing(music_name):
 		for player in AudioManager.playing_bgm:
@@ -46,9 +50,16 @@ func _ready():
 
 
 func spawn_platform():
-	# add choosing of spawning other platforms by a certain chance here
-	var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
-	var platform = load(path_to_platform).instantiate()
+	var ok = false
+	var platform:Platform
+	while !ok:
+		ok = true
+		var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
+		platform = load(path_to_platform).instantiate()
+		# if there are two spiky platforms in a row its not ok anymore since the player will die here
+		if platform is SpikyPlatform and $Platforms.get_child($Platforms.get_child_count()-1) is SpikyPlatform:
+				ok = false
+				
 	$Platforms.add_child(platform)
 	platform.position.x = randi_range(0, get_viewport_rect().size.x)
 	platform.global_position.y = next_platform_spawn_y

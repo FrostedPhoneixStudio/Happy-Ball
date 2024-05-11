@@ -8,12 +8,16 @@ signal screen_exited(platform)
 @export var jump_force_scale = 1.0 # parameter for how heigh the ball should jump on collision
 @export var ball:Ball # set this when spawning the platform
 
+var point_counted = false
+
 func _physics_process(delta):
 	# make the platform collidable with the ball only if the ball is above it
 	if ball:
 		if ball.global_position.y < global_position.y and !get_collision_layer_value(1):
 			set_collision_layer_value(1, true)
-			Global.points += 1
+			if !point_counted:
+				Global.level.points += 5
+				point_counted = true
 		
 		if ball.global_position.y - (ball.height / 2) > global_position.y and get_collision_layer_value(1):
 			set_collision_layer_value(1, false)

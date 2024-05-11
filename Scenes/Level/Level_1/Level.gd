@@ -45,7 +45,7 @@ func _ready():
 		
 	$Player.died.connect(func (player):
 		await get_tree().create_timer(1).timeout
-		$UI/DeathScreen.open()
+		game_over()
 		)
 
 
@@ -100,6 +100,11 @@ func position_platforms():
 func reset_game_timer():
 	timer.wait_time = timer.time_left + 60
 	timer.start()
+	
+
+func game_over():
+	$UI/DeathScreen.open()
+	Global._save()
 
 
 func on_platform_screen_exited(platform):
@@ -113,3 +118,4 @@ func _on_clock_spawn_timer_timeout():
 
 func _on_game_timer_timeout():
 	$Player.die()
+

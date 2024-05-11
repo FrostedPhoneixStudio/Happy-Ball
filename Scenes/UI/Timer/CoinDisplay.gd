@@ -1,4 +1,4 @@
 extends Control
 
 func _process(delta):
-	$Label.text = str(Global.coins)
+	$HBoxContainer/Label.text = str(Global.coins)

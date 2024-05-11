@@ -1,18 +1,60 @@
-[gd_scene load_steps=5 format=3 uid="uid://e7ebdnq76ohl"]
+[gd_scene load_steps=8 format=3 uid="uid://e7ebdnq76ohl"]
 
 [ext_resource type="PackedScene" uid="uid://cua34fuqsx2tb" path="res://Scenes/UI/Timer/Timer.tscn" id="1_kn3tk"]
 [ext_resource type="Script" path="res://Scenes/UI/UI.gd" id="1_w5ac0"]
 [ext_resource type="PackedScene" uid="uid://cokh7kbpvtsk4" path="res://Scenes/UI/Timer/CoinDisplay.tscn" id="2_7n7a4"]
+[ext_resource type="PackedScene" uid="uid://byujvy4as2hnh" path="res://Scenes/UI/PauseScreen/PauseScreen.tscn" id="2_wtk16"]
 [ext_resource type="PackedScene" uid="uid://d0picsb33h0l7" path="res://Scenes/UI/DeathScreen/DeathScreen.tscn" id="4_w3qhg"]
+[ext_resource type="PackedScene" uid="uid://r8sr5yxqjtrg" path="res://Scenes/UI/PointDisplay/PointDisplay.tscn" id="6_0cp51"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kjq88"]
+bg_color = Color(1, 1, 1, 1)
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_w5ac0")
+
+[node name="PauseScreen" parent="." instance=ExtResource("2_wtk16")]
+process_mode = 3
+offset_right = 2048.0
+offset_bottom = 4096.0
 
 [node name="Timer" parent="." instance=ExtResource("1_kn3tk")]
 offset_right = 431.0
 
 [node name="CoinDisplay" parent="." instance=ExtResource("2_7n7a4")]
+offset_left = 313.0
+offset_top = 6.0
+offset_right = 598.0
+offset_bottom = 230.0
 
 [node name="DeathScreen" parent="." instance=ExtResource("4_w3qhg")]
-offset_right = 1024.0
-offset_bottom = 2048.0
+
+[node name="PauseButton" type="Button" parent="."]
+offset_left = 874.0
+offset_top = 76.0
+offset_right = 955.0
+offset_bottom = 159.0
+flat = true
+
+[node name="Panel" type="Panel" parent="PauseButton"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 27.0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjq88")
+
+[node name="Panel2" type="Panel" parent="PauseButton"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kjq88")
+
+[node name="PointDisplay" parent="." instance=ExtResource("6_0cp51")]
+
+[connection signal="pressed" from="PauseButton" to="." method="_on_pause_button_pressed"]

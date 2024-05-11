@@ -57,7 +57,9 @@ func spawn_platform():
 		var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
 		platform = load(path_to_platform).instantiate()
 		# if there are two spiky platforms in a row its not ok anymore since the player will die here
-		if platform is SpikyPlatform and $Platforms.get_child($Platforms.get_child_count()-1) is SpikyPlatform:
+		if platform is SpikyPlatform \
+			and $Platforms.get_child_count() >=2 \
+			and $Platforms.get_child($Platforms.get_child_count()-1) is SpikyPlatform:
 				ok = false
 				
 	$Platforms.add_child(platform)

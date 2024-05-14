@@ -26,18 +26,19 @@ enum STATES {
 var dead := false
 var state = STATES.NEUTRAL
 
-var speed_multiplicator = 1.0 # speed up game when achive every 100 points
+var speed_multiplier = 1.0 # speed up game when achive every 100 points
 
 func _ready():
 	# initial jump on start of the game
 	## TODO maybe this should go into the levle class?
 	jump()
+	
+	
 
 func _physics_process(delta):
 	handle_states()
 	handle_animation()
 	apply_gravity()
-	speed_up_game(Global.points)
 	move(delta)
 
 
@@ -50,14 +51,14 @@ func move(delta):
 			
 	
 func apply_gravity():
-	apply_force(Vector2(0, GRAVITY * grivity_scale))
+	apply_force(Vector2(0, GRAVITY * grivity_scale * speed_multiplier * speed_multiplier))
 
 func apply_force(force:Vector2):
 	velocity += force
 
 func jump(jump_force_scale = 1.0):
 	velocity = Vector2.ZERO
-	apply_force(Vector2(0, -jump_force * jump_force_scale * speed_multiplicator))
+	apply_force(Vector2(0, -jump_force * jump_force_scale * speed_multiplier))
 	
 	if state != STATES.GAME_OVER:
 		if jump_force_scale <= 1.0:
@@ -97,8 +98,11 @@ func handle_animation():
 			$Sprite2D.frame = 3
 
 
-func speed_up_game(points):
-	speed_multiplicator = 1 + points/1000
-	if speed_multiplicator > 2:
-		speed_multiplicator = 2
-	grivity_scale = speed_multiplicator * speed_multiplicator
+func speed_up(points):
+	if points % 100 == 0:
+		speed_multiplier = 1.0 + float(points)/1000
+		speed_multiplier = min(speed_multiplier, 2.0)
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited():
+	die()

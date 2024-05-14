@@ -27,28 +27,46 @@ var queue_clock_spawn := false
 # used for platform movement
 var initial_mouse_position 
 
+var points = 0:
+	set(value):
+		points = value
+		$Player.speed_up(points)
+
 
 func _ready():
 	for i in range(platform_count_on_screen):
 		spawn_platform()
 	Global.level = self
-	Global.points = 5
 	
 	if !AudioManager.is_playing(music_name):
 		for player in AudioManager.playing_bgm:
 			player.fade_out(0.7)
 		AudioManager.fade_in(music_name, 0.7)
+		
+	$Player.died.connect(func (player):
+		await get_tree().create_timer(1).timeout
+		game_over()
+		)
 
 
 func spawn_platform():
-	# add choosing of spawning other platforms by a certain chance here
-	var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
-	var platform = load(path_to_platform).instantiate()
+	var ok = false
+	var platform:Platform
+	while !ok:
+		ok = true
+		var path_to_platform = Helper.pick_random_from_weighted_list(platform_weights)
+		platform = load(path_to_platform).instantiate()
+		# if there are two spiky platforms in a row its not ok anymore since the player will die here
+		if platform is SpikyPlatform \
+			and $Platforms.get_child_count() >=2 \
+			and $Platforms.get_child($Platforms.get_child_count()-1) is SpikyPlatform:
+				ok = false
+				
 	$Platforms.add_child(platform)
 	platform.position.x = randi_range(0, get_viewport_rect().size.x)
 	platform.global_position.y = next_platform_spawn_y
 	next_platform_spawn_y -= platform_spawn_increment
-	platform.ball = $RedBall
+	platform.ball = $Player
 	platform.screen_exited.connect(on_platform_screen_exited)
 	
 	# check if a coin or a clock should spawn on the platform
@@ -83,6 +101,11 @@ func position_platforms():
 func reset_game_timer():
 	timer.wait_time = timer.time_left + 60
 	timer.start()
+	
+
+func game_over():
+	$UI/DeathScreen.open()
+	Global._save()
 
 
 func on_platform_screen_exited(platform):
@@ -95,4 +118,5 @@ func _on_clock_spawn_timer_timeout():
 
 
 func _on_game_timer_timeout():
-	$RedBall.die()
+	$Player.die()
+

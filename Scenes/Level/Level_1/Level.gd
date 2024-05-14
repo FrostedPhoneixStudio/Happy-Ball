@@ -70,7 +70,7 @@ func spawn_platform():
 	platform.screen_exited.connect(on_platform_screen_exited)
 	
 	# check if a coin or a clock should spawn on the platform
-	if path_to_platform != "res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn":
+	if platform != SpikyPlatform:
 		if randf_range(0, 1) < coin_spawn_probability:
 			var coin = preload("res://Scenes/Collectable/Coins/NormalCoin/NormalCoin.tscn").instantiate()
 			platform.add_child(coin)

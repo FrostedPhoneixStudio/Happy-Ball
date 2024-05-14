@@ -22,7 +22,7 @@ func _physics_process(delta):
 		if ball.global_position.y - (ball.height / 2) > global_position.y and get_collision_layer_value(1):
 			set_collision_layer_value(1, false)
 
-	
+
 	# check if platform exited screen (really just the bottom of the screen)
 	var game_y = get_viewport().get_camera_2d().global_position.y
 	if global_position.y > game_y + get_viewport_rect().size.y / 2:

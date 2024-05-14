@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c71tlvi80l5kd"]
+[gd_scene load_steps=5 format=3 uid="uid://didf7uicktbeo"]
 
-[ext_resource type="Script" path="res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.gd" id="1_ep1op"]
-[ext_resource type="Texture2D" uid="uid://cs0761t733p67" path="res://Images/World_1/wood-platform-spiked.png" id="2_7sp7q"]
+[ext_resource type="Script" path="res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.gd" id="1_6g88u"]
+[ext_resource type="Texture2D" uid="uid://bbhgs6gknqryj" path="res://Images/World_2/ice_platform_spiked.png" id="2_48h62"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
 bounce = 1.0
@@ -12,13 +12,13 @@ size = Vector2(254, 43)
 [node name="SpikyPlatform" type="StaticBody2D"]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_rsav0")
-script = ExtResource("1_ep1op")
+script = ExtResource("1_6g88u")
 jump_force_scale = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 11)
 scale = Vector2(2, 2)
-texture = ExtResource("2_7sp7q")
+texture = ExtResource("2_48h62")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 23.5)

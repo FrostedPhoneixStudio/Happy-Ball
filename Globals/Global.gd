@@ -6,11 +6,13 @@ var level:Level
 var coins = 0
 var points = 0
 
+var save_path = OS.get_user_data_dir() + "save.json"
+
 func _ready():
-	_load("./save.json")
+	_load(save_path)
 
 func _exit_tree():
-	_save("./save.json")
+	_save(save_path)
 
 func _save(path):
 	var data = {

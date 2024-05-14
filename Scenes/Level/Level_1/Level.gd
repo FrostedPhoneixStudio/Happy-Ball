@@ -52,14 +52,15 @@ func spawn_platform():
 	platform.screen_exited.connect(on_platform_screen_exited)
 	
 	# check if a coin or a clock should spawn on the platform
-	if randf_range(0, 1) < coin_spawn_probability:
-		var coin = preload("res://Scenes/Collectable/Coins/NormalCoin/NormalCoin.tscn").instantiate()
-		platform.add_child(coin)
-		coin.global_position = platform.global_position
-	elif queue_clock_spawn:
-		var clock = preload("res://Scenes/Collectable/Clock/Clock.tscn").instantiate()
-		platform.add_child(clock)
-		queue_clock_spawn = false 
+	if path_to_platform != "res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn":
+		if randf_range(0, 1) < coin_spawn_probability:
+			var coin = preload("res://Scenes/Collectable/Coins/NormalCoin/NormalCoin.tscn").instantiate()
+			platform.add_child(coin)
+			coin.global_position = platform.global_position
+		elif queue_clock_spawn:
+			var clock = preload("res://Scenes/Collectable/Clock/Clock.tscn").instantiate()
+			platform.add_child(clock)
+			queue_clock_spawn = false 
 
 
 func _physics_process(delta):

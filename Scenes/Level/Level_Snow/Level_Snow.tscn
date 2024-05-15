@@ -9,9 +9,10 @@
 
 [node name="LevelSnow" type="Node2D"]
 script = ExtResource("1_tgdep")
-normal_platform = "res://Scenes/Platforms/NormalPlatform/SnowNormalPlatform.tscn"
-spiky_platform = "res://Scenes/Platforms/SpikyPlatform/SnowSpikyPlatform.tscn"
-include_bouncy_platform = false
+platform_weights = {
+"res://Scenes/Platforms/NormalPlatform/SnowNormalPlatform.tscn": 10,
+"res://Scenes/Platforms/SpikyPlatform/SnowSpikyPlatform.tscn": 1
+}
 
 [node name="Background" parent="." instance=ExtResource("2_wwh2c")]
 texture = ExtResource("3_1pgmm")

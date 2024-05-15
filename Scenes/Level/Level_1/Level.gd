@@ -15,19 +15,10 @@ class_name Level
 @onready var timer:Timer = $GameTimer
 
 # platform scene
-@export var normal_platform = "res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn"
-@export var bouncy_platform = "res://Scenes/Platforms/BouncyPlatform/BouncyPlatform.tscn"
-@export var spiky_platform = "res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn"
 
-@export var include_normal_platform: bool = true
-@export var include_bouncy_platform: bool = true
-@export var include_spiky_platform: bool = true
 
 # weighted list of probabilities of platform spawnes
-@onready var platform_weights = {
-	normal_platform: 10 if include_normal_platform else 0,
-	bouncy_platform: 2 if include_bouncy_platform else 0,
-	spiky_platform: 1 if include_spiky_platform else 0,
+@export var platform_weights = {
 }
 
 var platforms_on_screen:Array[Platform] = [] # array of all platforms currently on screen
@@ -43,11 +34,9 @@ var points = 0:
 
 
 func _ready():
-	print(platform_weights)
 	for i in range(platform_count_on_screen):
 		spawn_platform()
 	Global.level = self
-	print(normal_platform)
 	if !AudioManager.is_playing(music_name):
 		for player in AudioManager.playing_bgm:
 			player.fade_out(0.7)
@@ -57,8 +46,6 @@ func _ready():
 		await get_tree().create_timer(1).timeout
 		game_over()
 		)
-	print(normal_platform)
-	print(platform_weights)
 
 func spawn_platform():
 	var ok = false

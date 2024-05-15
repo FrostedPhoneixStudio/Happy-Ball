@@ -10,6 +10,11 @@
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_jkll5")
 music_name = "fantasy_music"
+platform_weights = {
+"res://Scenes/Platforms/BouncyPlatform/BouncyPlatform.tscn": 5,
+"res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn": 10,
+"res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn": 1
+}
 
 [node name="Background" parent="." instance=ExtResource("1_t01k2")]
 texture = ExtResource("1_o5b6q")

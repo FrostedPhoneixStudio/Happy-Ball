@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxaemjqlgh4ep"]
+
+[ext_resource type="Script" path="res://Scenes/Platforms/Platform.gd" id="1_j04u1"]
+[ext_resource type="Texture2D" uid="uid://b7ukim6t1afpc" path="res://Images/World_2/ice_platform.png" id="2_hw6u7"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtswk"]
+size = Vector2(258, 40)
+
+[node name="NormalPlatform" type="StaticBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_rsav0")
+script = ExtResource("1_j04u1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("2_hw6u7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 24)
+shape = SubResource("RectangleShape2D_jtswk")

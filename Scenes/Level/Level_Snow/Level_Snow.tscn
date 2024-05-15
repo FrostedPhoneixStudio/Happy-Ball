@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bo4kgosxxcomd"]
+
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Level.gd" id="1_tgdep"]
+[ext_resource type="PackedScene" uid="uid://c6inox8k1uonk" path="res://Scenes/Level/Background/Background.tscn" id="2_wwh2c"]
+[ext_resource type="Texture2D" uid="uid://b8137rj5iq6sj" path="res://Images/World_2/BG.png" id="3_1pgmm"]
+[ext_resource type="PackedScene" uid="uid://cfshrivdb6hc8" path="res://Scenes/Balls/SnowBall/SnowBall.tscn" id="4_txkk2"]
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Camera2D.gd" id="5_ry7lp"]
+[ext_resource type="PackedScene" uid="uid://e7ebdnq76ohl" path="res://Scenes/UI/UI.tscn" id="6_0vgdp"]
+
+[node name="LevelSnow" type="Node2D"]
+script = ExtResource("1_tgdep")
+platform_weights = {
+"res://Scenes/Platforms/NormalPlatform/SnowNormalPlatform.tscn": 10,
+"res://Scenes/Platforms/SpikyPlatform/SnowSpikyPlatform.tscn": 1
+}
+
+[node name="Background" parent="." instance=ExtResource("2_wwh2c")]
+texture = ExtResource("3_1pgmm")
+
+[node name="Player" parent="." instance=ExtResource("4_txkk2")]
+position = Vector2(512, 1294)
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("5_ry7lp")
+target = NodePath("../Player")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="UI" parent="." instance=ExtResource("6_0vgdp")]
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="ClockSpawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="ClockSpawnTimer" to="." method="_on_clock_spawn_timer_timeout"]

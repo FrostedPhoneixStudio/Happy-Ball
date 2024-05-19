@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://k3smpmx5c5ci"]
+
+[ext_resource type="Script" path="res://Scenes/Platforms/ForestPlatform/ForestPlatform.gd" id="1_3sd08"]
+[ext_resource type="Texture2D" uid="uid://xba1ornv4ei6" path="res://Images/World_Forest/Tree Branch.png" id="2_12b66"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtswk"]
+size = Vector2(171, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y2ys5"]
+size = Vector2(69, 34)
+
+[node name="ForestPlatform" type="StaticBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_rsav0")
+script = ExtResource("1_3sd08")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("2_12b66")
+
+[node name="CollisionLeft" type="CollisionShape2D" parent="."]
+position = Vector2(-121.5, 42)
+shape = SubResource("RectangleShape2D_jtswk")
+
+[node name="CollisionRight" type="CollisionShape2D" parent="."]
+position = Vector2(119, 42)
+shape = SubResource("RectangleShape2D_jtswk")
+
+[node name="CollisionCenter" type="CollisionShape2D" parent="."]
+position = Vector2(-1.5, 42)
+shape = SubResource("RectangleShape2D_y2ys5")

@@ -47,9 +47,10 @@ func move(delta):
 	if collision and collision.get_collider() and state != STATES.GAME_OVER:
 		if collision.get_collider() is Platform:
 			velocity = Vector2.ZERO
-			collision.get_collider().collide(self)
-			
-	
+			var shape_idx = collision.get_collider_shape_index()
+			collision.get_collider().collide(self,shape_idx)
+
+
 func apply_gravity():
 	apply_force(Vector2(0, GRAVITY * grivity_scale * speed_multiplier * speed_multiplier))
 

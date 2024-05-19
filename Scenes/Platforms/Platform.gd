@@ -43,5 +43,5 @@ func _physics_process(delta):
 
 
 # add here what should happen when the ball collides with the platform
-func collide(_ball): ## do we realy need the _ball parameter here? we've got the ball anyway in the ball variable in this class
+func collide(_ball,shape_idx): ## do we realy need the _ball parameter here? we've got the ball anyway in the ball variable in this class
 	_ball.jump(jump_force_scale)

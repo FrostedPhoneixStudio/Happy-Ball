@@ -3,7 +3,7 @@ extends Node2D
 class_name Level
 
 
-
+@export var leaderboard_index:int = 0
 @export var platform_count_on_screen := 5 # maximum number of platform on screen
 @export var coin_spawn_probability := 0.2 # propability of spawning a coin on a platform (for later maybe a curve?)
 @export var music_name := ""
@@ -105,6 +105,8 @@ func reset_game_timer():
 
 func game_over():
 	$UI/DeathScreen.open()
+	HighscoreManager.save_local_highscore(points, leaderboard_index)
+	HighscoreManager.submit_highscore(points, leaderboard_index)
 	Global._save()
 
 

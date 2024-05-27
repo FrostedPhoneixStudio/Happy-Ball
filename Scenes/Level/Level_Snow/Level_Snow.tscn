@@ -9,6 +9,7 @@
 
 [node name="LevelSnow" type="Node2D"]
 script = ExtResource("1_tgdep")
+leaderboard_index = 1
 platform_weights = {
 "res://Scenes/Platforms/NormalPlatform/SnowNormalPlatform.tscn": 10,
 "res://Scenes/Platforms/SpikyPlatform/SnowSpikyPlatform.tscn": 1

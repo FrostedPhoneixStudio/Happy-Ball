@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ucprdptrya8l"]
+[gd_scene load_steps=7 format=3 uid="uid://ucprdptrya8l"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/WorldSelectMenu/WorldSelectMenu.gd" id="1_whwk6"]
 [ext_resource type="Theme" uid="uid://c3gbnda0qarvm" path="res://Theme.tres" id="2_p80yi"]
 [ext_resource type="PackedScene" uid="uid://b464uo2kmgrf8" path="res://Scenes/Menus/WorldSelectMenu/WorldSelectButton.tscn" id="3_pp6fl"]
 [ext_resource type="Texture2D" uid="uid://cs341e7qdoswk" path="res://Images/World_1/BGFantasy.png" id="4_swhjq"]
 [ext_resource type="Texture2D" uid="uid://b8137rj5iq6sj" path="res://Images/World_2/BG.png" id="5_ftkoj"]
+[ext_resource type="Texture2D" uid="uid://dj3uvdjm01hx" path="res://Images/World_3/bg-forest.png" id="6_bbsqj"]
 
 [node name="WorldSelectMenu" type="CanvasLayer"]
 script = ExtResource("1_whwk6")
@@ -46,8 +47,8 @@ background_texture = ExtResource("5_ftkoj")
 [node name="ForestButton" parent="CenterContainer/VBoxContainer2/VBoxContainer" instance=ExtResource("3_pp6fl")]
 layout_mode = 2
 text = "Forest"
-level_path = "res://Scenes/Level/Level_1/Level_1.tscn"
-background_texture = ExtResource("4_swhjq")
+level_path = "res://Scenes/Level/Level_Forest/Level_Forest.tscn"
+background_texture = ExtResource("6_bbsqj")
 
 [node name="Button" type="Button" parent="CenterContainer/VBoxContainer2/VBoxContainer"]
 layout_mode = 2

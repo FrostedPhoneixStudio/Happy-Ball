@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://didf7uicktbeo"]
+[gd_scene load_steps=5 format=3 uid="uid://cc0cvlabsp1u5"]
 
 [ext_resource type="Script" path="res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.gd" id="1_6g88u"]
 [ext_resource type="Texture2D" uid="uid://bbhgs6gknqryj" path="res://Images/World_2/ice_platform_spiked.png" id="2_48h62"]

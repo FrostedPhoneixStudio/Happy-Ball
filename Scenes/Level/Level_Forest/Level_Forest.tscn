@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://pin2u5syt68h"]
+
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Level.gd" id="1_bjq1f"]
+[ext_resource type="PackedScene" uid="uid://cge0bk68t5lyx" path="res://Scenes/Balls/GreenBall/GreenBall.tscn" id="2_1rbsd"]
+[ext_resource type="PackedScene" uid="uid://c6inox8k1uonk" path="res://Scenes/Level/Background/Background.tscn" id="2_kb4uc"]
+[ext_resource type="Texture2D" uid="uid://dj3uvdjm01hx" path="res://Images/World_3/bg-forest.png" id="3_qbl5k"]
+[ext_resource type="Script" path="res://Scenes/Level/Level_1/Camera2D.gd" id="5_p7i2j"]
+[ext_resource type="PackedScene" uid="uid://e7ebdnq76ohl" path="res://Scenes/UI/UI.tscn" id="6_bj4pc"]
+
+[node name="LevelForest" type="Node2D"]
+script = ExtResource("1_bjq1f")
+leaderboard_index = 2
+platform_weights = {
+"res://Scenes/Platforms/BouncyPlatform/BouncyPlatform.tscn": 2,
+"res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn": 10,
+"res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn": 1
+}
+
+[node name="Background" parent="." instance=ExtResource("2_kb4uc")]
+texture = ExtResource("3_qbl5k")
+
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("5_p7i2j")
+target = NodePath("../Player")
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("2_1rbsd")]
+position = Vector2(512, 0)
+
+[node name="UI" parent="." instance=ExtResource("6_bj4pc")]
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[node name="ClockSpawnTimer" type="Timer" parent="."]
+wait_time = 20.0
+autostart = true
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
+[connection signal="timeout" from="ClockSpawnTimer" to="." method="_on_clock_spawn_timer_timeout"]

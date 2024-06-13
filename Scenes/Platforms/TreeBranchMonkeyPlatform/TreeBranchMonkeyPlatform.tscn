@@ -1,0 +1,105 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdyowu4yvunie"]
+
+[ext_resource type="Script" path="res://Scenes/Platforms/TreeBranchMonkeyPlatform/TreeBranchMonkeyPlatform.gd" id="1_kmqie"]
+[ext_resource type="Texture2D" uid="uid://bddig88ssvtlq" path="res://Images/World_3/monkey_branch_spritesheet.png" id="2_2qkrm"]
+[ext_resource type="Script" path="res://Scenes/Platforms/NormalPlatform/NormalPlatform.gd" id="3_4q5w3"]
+[ext_resource type="PackedScene" uid="uid://h85eqnr2wmbh" path="res://Scenes/Platforms/TreeBranchMonkeyPlatform/MonkeyPlatform/MonkeyPlatform.tscn" id="4_r5c76"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfdmq"]
+size = Vector2(153, 65)
+
+[sub_resource type="Animation" id="Animation_dplyr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_lwh3k"]
+resource_name = "idle"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 1]
+}
+
+[sub_resource type="Animation" id="Animation_vb206"]
+resource_name = "throw"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wyn0n"]
+_data = {
+"RESET": SubResource("Animation_dplyr"),
+"idle": SubResource("Animation_lwh3k"),
+"throw": SubResource("Animation_vb206")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7fy80"]
+size = Vector2(398, 15)
+
+[node name="TreeBranchMonkeyPlatform" type="StaticBody2D" node_paths=PackedStringArray("platforms")]
+script = ExtResource("1_kmqie")
+platforms = [NodePath("NormalPlatformLeft"), NodePath("MonkeyPlatform")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 39)
+scale = Vector2(2, 2)
+texture = ExtResource("2_2qkrm")
+hframes = 3
+
+[node name="NormalPlatformLeft" type="StaticBody2D" parent="."]
+position = Vector2(-55, -16)
+script = ExtResource("3_4q5w3")
+can_spawn_collecables = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NormalPlatformLeft"]
+position = Vector2(-62, 33)
+shape = SubResource("RectangleShape2D_pfdmq")
+
+[node name="MonkeyPlatform" parent="." instance=ExtResource("4_r5c76")]
+position = Vector2(-1, -10)
+
+[node name="CollisionShape2D" parent="MonkeyPlatform" index="0"]
+position = Vector2(78, 30)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wyn0n")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 42.5)
+shape = SubResource("RectangleShape2D_7fy80")
+disabled = true
+
+[connection signal="thrown" from="MonkeyPlatform" to="." method="_on_monkey_platform_thrown"]
+
+[editable path="MonkeyPlatform"]

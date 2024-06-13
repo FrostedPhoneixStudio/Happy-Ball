@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://7wbm6liubyyt"]
+
+[ext_resource type="Script" path="res://Scenes/Platforms/CombinedPlatform/CombinedPlatform.gd" id="1_mk5dl"]
+[ext_resource type="Texture2D" uid="uid://bpqjxo5uyfcow" path="res://Images/World_1/wood-plaform-plain.png" id="2_fg30l"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
+bounce = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jtswk"]
+size = Vector2(258, 40)
+
+[node name="CombinedPlatform" type="StaticBody2D"]
+collision_layer = 0
+physics_material_override = SubResource("PhysicsMaterial_rsav0")
+script = ExtResource("1_mk5dl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 11)
+scale = Vector2(2, 2)
+texture = ExtResource("2_fg30l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 24)
+shape = SubResource("RectangleShape2D_jtswk")

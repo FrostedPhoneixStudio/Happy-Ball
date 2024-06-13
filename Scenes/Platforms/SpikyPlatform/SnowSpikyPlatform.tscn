@@ -14,6 +14,7 @@ collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_rsav0")
 script = ExtResource("1_6g88u")
 jump_force_scale = 0.5
+can_spawn_collecables = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 11)

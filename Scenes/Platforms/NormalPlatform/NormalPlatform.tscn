@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://7wbm6liubyyt"]
+[gd_scene load_steps=5 format=3 uid="uid://dp3h3phpa28e0"]
 
+[ext_resource type="Script" path="res://Scenes/Platforms/NormalPlatform/NormalPlatform.gd" id="1_aiqmm"]
 [ext_resource type="Texture2D" uid="uid://bpqjxo5uyfcow" path="res://Images/World_1/wood-plaform-plain.png" id="1_ditkk"]
-[ext_resource type="Script" path="res://Scenes/Platforms/Platform.gd" id="1_gukbm"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
 bounce = 1.0
@@ -12,7 +12,7 @@ size = Vector2(258, 40)
 [node name="NormalPlatform" type="StaticBody2D"]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_rsav0")
-script = ExtResource("1_gukbm")
+script = ExtResource("1_aiqmm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 11)

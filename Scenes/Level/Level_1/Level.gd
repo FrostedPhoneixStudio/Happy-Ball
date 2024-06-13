@@ -6,6 +6,8 @@ class_name Level
 @export var leaderboard_index:int = 0
 @export var platform_count_on_screen := 5 # maximum number of platform on screen
 @export var coin_spawn_probability := 0.2 # propability of spawning a coin on a platform (for later maybe a curve?)
+@export var fruit_spawn_probability := 0.0 # propability of spawning a fruit on a platform (for later maybe a curve?)
+@export var spider_spawn_probability := 0.0 # propability of spawning a spider on a platform (for later maybe a curve?)
 @export var music_name := ""
 
 @onready var last_platforms_position:Vector2 = $Platforms.global_position # used for platform movement
@@ -31,6 +33,11 @@ var points = 0:
 	set(value):
 		points = value
 		$Player.speed_up(points)
+		
+var fruit_count := 2:
+	set(value):
+		fruit_count = value
+		print(value)
 
 
 func _ready():
@@ -59,22 +66,28 @@ func spawn_platform():
 			and $Platforms.get_child_count() >=2 \
 			and $Platforms.get_child($Platforms.get_child_count()-1) is SpikyPlatform:
 				ok = false
-				
+	
+	platform.ball = $Player
 	$Platforms.add_child(platform)
 	platform.position.x = randi_range(0, get_viewport_rect().size.x)
 	platform.global_position.y = next_platform_spawn_y
 	next_platform_spawn_y -= platform_spawn_increment
-	platform.ball = $Player
 	platform.screen_exited.connect(on_platform_screen_exited)
 	
 	# check if a coin or a clock should spawn on the platform
-	if platform is SpikyPlatform:
-		pass
-	else:
+	if platform.can_spawn_collecables:
 		if randf_range(0, 1) < coin_spawn_probability:
 			var coin = preload("res://Scenes/Collectable/Coins/NormalCoin/NormalCoin.tscn").instantiate()
 			platform.add_child(coin)
 			coin.global_position = platform.global_position
+		elif randf_range(0, 1) < fruit_spawn_probability:
+			var fruit = preload("res://Scenes/Collectable/Fruit/Fruit.tscn").instantiate()
+			platform.add_child(fruit)
+			fruit.global_position = platform.global_position 
+		elif randf_range(0, 1) < spider_spawn_probability:
+			var spider = preload("res://Scenes/Collectable/Spider/Spider.tscn").instantiate()
+			platform.add_child(spider)
+			spider.global_position = platform.global_position + Vector2(50,0)
 		elif queue_clock_spawn:
 			var clock = preload("res://Scenes/Collectable/Clock/Clock.tscn").instantiate()
 			platform.add_child(clock)

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://dgo08nui61cl4"]
+
+[ext_resource type="Script" path="res://Scenes/Platforms/CombinedPlatform/CombinedPlatform.gd" id="1_1v4ck"]
+[ext_resource type="Texture2D" uid="uid://bbx8eix5wnchy" path="res://Images/World_3/Tree Branch.png" id="1_udd1b"]
+[ext_resource type="Script" path="res://Scenes/Platforms/NormalPlatform/NormalPlatform.gd" id="3_q2fmu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfdmq"]
+size = Vector2(128, 58)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r5l1r"]
+size = Vector2(404, 20)
+
+[node name="TreeBranchPlatform" type="StaticBody2D" node_paths=PackedStringArray("platforms")]
+script = ExtResource("1_1v4ck")
+platforms = [NodePath("NormalPlatformLeft"), NodePath("NormalPlatformRight")]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("1_udd1b")
+
+[node name="NormalPlatformLeft" type="StaticBody2D" parent="."]
+collision_layer = 0
+script = ExtResource("3_q2fmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NormalPlatformLeft"]
+position = Vector2(-128, 19)
+shape = SubResource("RectangleShape2D_pfdmq")
+
+[node name="NormalPlatformRight" type="StaticBody2D" parent="."]
+position = Vector2(259, 0)
+collision_layer = 0
+script = ExtResource("3_q2fmu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NormalPlatformRight"]
+position = Vector2(-128, 19)
+shape = SubResource("RectangleShape2D_pfdmq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 38)
+shape = SubResource("RectangleShape2D_r5l1r")
+disabled = true

@@ -1,7 +1,3 @@
-# Baseclass for Balls
-# including fucntions for movement, jumping, and animation
-##TODO maybe the special abilities could be child nodes we add? or we inherit from this class and add the functionality
-## this way
 extends CharacterBody2D
 
 class_name Ball
@@ -12,6 +8,7 @@ const GRAVITY = 9.81 * 3
 
 @export var grivity_scale := 1.0 # use this value to scale the gravity of the ball (enemies could use this for example)
 @export var jump_force := 1800.0 ## TODO finetune this
+var time_scale = 1.0
 
 @onready var height = $Sprite2D.texture.get_height() * scale.y # the height of the ball TODO add width too
 
@@ -26,14 +23,13 @@ enum STATES {
 var dead := false
 var state = STATES.NEUTRAL
 
-var speed_multiplier = 1.0 # speed up game when achive every 100 points
+var speed_multiplier = 1.0 # speed up game when achieve every 100 points
+var can_speed_up = true
 
 func _ready():
 	# initial jump on start of the game
-	## TODO maybe this should go into the levle class?
+	## TODO maybe this should go into the level class?
 	jump()
-	
-	
 
 func _physics_process(delta):
 	handle_states()
@@ -41,48 +37,42 @@ func _physics_process(delta):
 	apply_gravity()
 	move(delta)
 
-
 func move(delta):
-	var collision = move_and_collide(velocity * delta)
+	var collision = move_and_collide(velocity * delta * time_scale)
 	if collision and collision.get_collider() and state != STATES.GAME_OVER:
 		if collision.get_collider() is Platform:
 			velocity = Vector2.ZERO
 			collision.get_collider().collide(self)
-			
-	
+
 func apply_gravity():
-	apply_force(Vector2(0, GRAVITY * grivity_scale * speed_multiplier * speed_multiplier))
+	apply_force(Vector2(0, GRAVITY * time_scale * grivity_scale * speed_multiplier * speed_multiplier))
 
 func apply_force(force:Vector2):
 	velocity += force
 
 func jump(jump_force_scale = 1.0):
-	velocity = Vector2.ZERO
-	apply_force(Vector2(0, -jump_force * jump_force_scale * speed_multiplier))
-	
+	velocity.y = -jump_force * jump_force_scale * speed_multiplier
+
 	if state != STATES.GAME_OVER:
 		if jump_force_scale <= 1.0:
 			state = STATES.NORMAL_JUMP
 		else:
 			state = STATES.DOUBLE_JUMP
 
-
 func die():
-	if !dead:
+	if not dead:
 		state = STATES.GAME_OVER
 		dead = true
 		emit_signal("died", self)
-		
-		# disable collision whe dead
+
+		# disable collision when dead
 		set_collision_layer_value(1, false)
 		set_collision_mask_value(1, false)
-
 
 func handle_states():
 	if state != STATES.GAME_OVER and state != STATES.POWER_MODE:
 		if velocity.y > 0:
 			state = STATES.NEUTRAL
-
 
 func handle_animation():
 	match state:
@@ -97,12 +87,11 @@ func handle_animation():
 		STATES.GAME_OVER:
 			$Sprite2D.frame = 3
 
-
 func speed_up(points):
-	if points % 100 == 0:
-		speed_multiplier = 1.0 + float(points)/1000
-		speed_multiplier = min(speed_multiplier, 2.0)
-
+	if can_speed_up:
+		if points % 100 == 0:
+			speed_multiplier = 1.0 + float(points) / 1000
+			speed_multiplier = min(speed_multiplier, 2.0)
 
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	die()

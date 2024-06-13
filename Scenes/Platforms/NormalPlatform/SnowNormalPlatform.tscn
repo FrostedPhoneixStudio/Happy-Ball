@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bxaemjqlgh4ep"]
 
-[ext_resource type="Script" path="res://Scenes/Platforms/Platform.gd" id="1_j04u1"]
+[ext_resource type="Script" path="res://Scenes/Platforms/NormalPlatform/NormalPlatform.gd" id="1_hxiph"]
 [ext_resource type="Texture2D" uid="uid://b7ukim6t1afpc" path="res://Images/World_2/ice_platform.png" id="2_hw6u7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
@@ -12,7 +12,7 @@ size = Vector2(258, 40)
 [node name="NormalPlatform" type="StaticBody2D"]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_rsav0")
-script = ExtResource("1_j04u1")
+script = ExtResource("1_hxiph")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 11)

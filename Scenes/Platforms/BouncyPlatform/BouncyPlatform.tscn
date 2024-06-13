@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bf73bf2ktfrky"]
 
-[ext_resource type="Script" path="res://Scenes/Platforms/Platform.gd" id="1_xp2w1"]
+[ext_resource type="Script" path="res://Scenes/Platforms/NormalPlatform/NormalPlatform.gd" id="1_62gmt"]
 [ext_resource type="Texture2D" uid="uid://bau223yot5ry6" path="res://Images/World_1/wood-platform-bouncy.png" id="2_nc8m4"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_rsav0"]
@@ -12,8 +12,8 @@ size = Vector2(252, 25)
 [node name="BouncyPlatform" type="StaticBody2D"]
 collision_layer = 0
 physics_material_override = SubResource("PhysicsMaterial_rsav0")
-script = ExtResource("1_xp2w1")
-jump_force_scale = 1.6
+script = ExtResource("1_62gmt")
+jump_force_scale = 1.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-1, 11)

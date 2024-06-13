@@ -10,10 +10,16 @@
 [node name="LevelForest" type="Node2D"]
 script = ExtResource("1_bjq1f")
 leaderboard_index = 2
+coin_spawn_probability = 0.1
+fruit_spawn_probability = 0.1
+spider_spawn_probability = 0.1
 platform_weights = {
 "res://Scenes/Platforms/BouncyPlatform/BouncyPlatform.tscn": 2,
-"res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn": 10,
-"res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn": 1
+"res://Scenes/Platforms/NormalPlatform/NormalPlatform.tscn": 15,
+"res://Scenes/Platforms/SpikyPlatform/SpikyPlatform.tscn": 4,
+"res://Scenes/Platforms/TreeBranchBirdPlatform/TreeBranchBirdPlatform.tscn": 2,
+"res://Scenes/Platforms/TreeBranchMonkeyPlatform/TreeBranchMonkeyPlatform.tscn": 2,
+"res://Scenes/Platforms/TreeBranchPlatform/TreeBranchPlatform.tscn": 7
 }
 
 [node name="Background" parent="." instance=ExtResource("2_kb4uc")]

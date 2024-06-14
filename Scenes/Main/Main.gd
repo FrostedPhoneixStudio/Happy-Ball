@@ -8,7 +8,7 @@ class_name Main
 
 func _ready():
 	Global.main = self
-	change_scene("res://Scenes/Menus/MainMenu/MainMenu.tscn")
+	change_scene("res://Scenes/Intro/intro.tscn")
 
 
 func change_scene_to_instance(instanced_scene : Node, animation_speed = 1):

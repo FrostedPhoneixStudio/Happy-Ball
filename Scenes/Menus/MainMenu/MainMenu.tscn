@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt06yje8e6ypj"]
+[gd_scene load_steps=4 format=3 uid="uid://bt06yje8e6ypj"]
 
 [ext_resource type="Script" path="res://Scenes/Menus/MainMenu/MainMenu.gd" id="1_g27ab"]
 [ext_resource type="Theme" uid="uid://c3gbnda0qarvm" path="res://Theme.tres" id="2_rge8x"]
+[ext_resource type="Texture2D" uid="uid://c54wysiv0v7rv" path="res://Images/Logo/Happy Ball Logo.png" id="3_nrph7"]
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource("1_g27ab")
@@ -18,5 +19,10 @@ custom_minimum_size = Vector2(500, 200)
 layout_mode = 2
 theme = ExtResource("2_rge8x")
 text = "Start"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(570, 430)
+scale = Vector2(3.19688, 2.61111)
+texture = ExtResource("3_nrph7")
 
 [connection signal="pressed" from="Control/StartButton" to="." method="_on_start_button_pressed"]
